@@ -1,0 +1,5 @@
+# The Wayland compositor runs as the user (ADR-018). seatd hands it the DRM master fd,
+# but wlroots also reopens the device for its buffers, so display devices belong to the
+# video group (the session user is a member) instead of root only.
+SUBSYSTEM=="drm", KERNEL=="card[0-9]*", GROUP="video", MODE="0660"
+SUBSYSTEM=="drm", KERNEL=="renderD[0-9]*", GROUP="video", MODE="0666"

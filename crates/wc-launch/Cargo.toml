@@ -1,0 +1,11 @@
+[package]
+name = "wc-launch"
+description = "ShellExecute for WinCraft: decides how a file is opened and starts it"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+wc-formats.workspace = true

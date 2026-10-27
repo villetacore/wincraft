@@ -1,0 +1,61 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/wc-formats",
+    "crates/wc-paths",
+    "crates/wc-launch",
+    "crates/wc-runtime",
+    "crates/wc-ui",
+    "crates/wc-wayland",
+    "system/wincraft-boot",
+    "system/wincraft-init",
+    "system/winlogon",
+    "apps/explorer",
+    "apps/notepad",
+    "apps/taskmgr",
+    "apps/start",
+    "apps/browser",
+]
+# On the Windows development host only the platform-independent libraries are built
+# and tested. The system components and the shell run only inside the guest (ADR-016).
+default-members = [
+    "crates/wc-formats",
+    "crates/wc-paths",
+    "crates/wc-launch",
+    "crates/wc-runtime",
+]
+
+[workspace.package]
+version = "0.4.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT"
+publish = false
+
+[workspace.dependencies]
+wc-formats = { path = "crates/wc-formats" }
+wc-paths = { path = "crates/wc-paths" }
+wc-launch = { path = "crates/wc-launch" }
+wc-runtime = { path = "crates/wc-runtime" }
+wc-ui = { path = "crates/wc-ui" }
+wc-wayland = { path = "crates/wc-wayland" }
+eframe = { version = "0.32", default-features = false, features = ["default_fonts", "glow", "wayland"] }
+egui_glow = { version = "0.32", default-features = false }
+glutin = { version = "0.32", default-features = false, features = ["egl", "wayland"] }
+raw-window-handle = "0.6"
+smithay-client-toolkit = "0.20"
+# libwayland-client is loaded at run time (as winit does), so glutin can share the connection.
+wayland-backend = { version = "0.3", features = ["client_system", "dlopen"] }
+egui = { version = "0.32", default-features = false }
+libc = "0.2"
+sha2 = "0.10"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4
+panic = "unwind"
+
+# The early boot stage is tiny and static; keep it small.
+[profile.release.package.wincraft-boot]
+opt-level = "s"

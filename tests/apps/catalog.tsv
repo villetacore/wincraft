@@ -1,0 +1,6 @@
+id	name	version	arch	source	file	sha256	scenario
+# COMP-02 / APP-09: real programs with pinned versions and hashes. The files are not in the
+# repository (their licenses are their own); scripts/apps-iso.ps1 downloads them to dist/apps
+# and refuses a file whose hash differs. Scenario: what the run checks inside the VM.
+7zip	7-Zip	26.04	x64	https://github.com/ip7z/7zip/releases/download/26.04/7z2604-x64.exe	7z2604-x64.exe	d54bf805f9f3704d1e8db2fa3498ae7ef2df0312b40b558e7c71c734430a665d	install (silent /S) -> program files + Start menu shortcut -> 7-Zip File Manager window
+cavestory	Cave Story (Doukutsu Monogatari, freeware, English by Aeon Genesis)	1.0.0.6	x86	https://www.cavestory.one/downloads/cavestoryen.zip	cavestoryen.zip	aa87fa30bee9b4980640c7e104791354e0f1f6411ee0d45a70af70046aa0685f	zip "Extract All" -> 32-bit DirectDraw game window, still running after 20 s

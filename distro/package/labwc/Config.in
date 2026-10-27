@@ -1,0 +1,16 @@
+config BR2_PACKAGE_LABWC
+	bool "labwc"
+	depends on BR2_PACKAGE_WLROOTS
+	select BR2_PACKAGE_CAIRO
+	select BR2_PACKAGE_CAIRO_PNG
+	select BR2_PACKAGE_LIBGLIB2
+	select BR2_PACKAGE_LIBPNG
+	select BR2_PACKAGE_LIBXML2
+	select BR2_PACKAGE_PANGO
+	help
+	  Window-stacking Wayland compositor based on wlroots, with
+	  Openbox-compatible rc.xml and themes. WinCraft's display server
+	  and window manager (it replaces Xorg + Openbox); X11 and Windows
+	  programs run through XWayland.
+
+	  https://labwc.github.io

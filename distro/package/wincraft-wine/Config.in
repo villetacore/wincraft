@@ -1,0 +1,26 @@
+config BR2_PACKAGE_WINCRAFT_WINE
+	bool "wincraft-wine (Wine WoW64)"
+	depends on BR2_x86_64
+	depends on !BR2_STATIC_LIBS
+	depends on BR2_TOOLCHAIN_HAS_THREADS_NPTL
+	select BR2_PACKAGE_XLIB_LIBX11
+	select BR2_PACKAGE_XLIB_LIBXEXT
+	# X11 features of winex11 under XWayland (cursors, raw input, multi-monitor,
+	# display modes, compositing); explicit since no X server selects them any more.
+	select BR2_PACKAGE_XLIB_LIBXCOMPOSITE
+	select BR2_PACKAGE_XLIB_LIBXCURSOR
+	select BR2_PACKAGE_XLIB_LIBXFIXES
+	select BR2_PACKAGE_XLIB_LIBXI
+	select BR2_PACKAGE_XLIB_LIBXINERAMA
+	select BR2_PACKAGE_XLIB_LIBXRANDR
+	select BR2_PACKAGE_XLIB_LIBXRENDER
+	select BR2_PACKAGE_XLIB_LIBXXF86VM
+	select BR2_PACKAGE_FREETYPE
+	select BR2_PACKAGE_FONTCONFIG
+	help
+	  Wine 11 built in the new WoW64 mode: one 64-bit Unix build that
+	  runs both x86-64 and 32-bit x86 Windows programs, with PE modules
+	  compiled by the build host's mingw-w64 cross compilers.
+	  Buildroot's own wine package supports 32-bit x86 targets only.
+
+	  https://www.winehq.org

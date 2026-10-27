@@ -1,0 +1,27 @@
+#!/bin/sh
+# Desktop session of the unprivileged user (UID 1000).
+export LIBGL_ALWAYS_SOFTWARE=1 WINEDEBUG=-all WINEPREFIX="$HOME/.wine"
+export WINCRAFT_GUEST=1
+xrandr --output Virtual-1 --mode 1024x768 2>/dev/null || true
+openbox &
+# Prepare a new prefix without prompting to download optional Mono/Gecko.
+# The override applies only to initialization, not to subsequently launched apps.
+# Launchers wait for the ready marker: Wine must not read a half-written prefix.
+READY="$XDG_RUNTIME_DIR/wine-prefix-ready"
+rm -f "$READY"
+valid_prefix() {
+    test -s "$WINEPREFIX/system.reg" && test -s "$WINEPREFIX/user.reg" &&
+        head -n1 "$WINEPREFIX/system.reg" | grep -q '^WINE REGISTRY'
+}
+if test -e "$WINEPREFIX" && ! valid_prefix; then
+    # Typically a power cut while Wine saved its registry. Keep it for recovery.
+    BROKEN="$WINEPREFIX.broken-$(date +%Y%m%d-%H%M%S)"
+    mv "$WINEPREFIX" "$BROKEN"
+    echo "WINCRAFT_WINE_PREFIX_RESET moved damaged prefix to $BROKEN"
+fi
+if valid_prefix; then
+    touch "$READY"
+else
+    (WINEDLLOVERRIDES='mscoree,mshtml=' wineboot --init; wineserver -w; touch "$READY") &
+fi
+exec /usr/bin/wincraft

@@ -1,0 +1,13 @@
+[package]
+name = "start"
+description = "WinCraft launcher: bounded wait for the Win32 environment, launch journal, process follow-up"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+libc.workspace = true
+wc-launch.workspace = true
+wc-runtime.workspace = true

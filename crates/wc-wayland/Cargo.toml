@@ -1,0 +1,16 @@
+[package]
+name = "wc-wayland"
+description = "Wayland client side of the WinCraft shell: layer-shell surfaces for egui, the taskbar's window list"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+egui.workspace = true
+egui_glow.workspace = true
+glutin.workspace = true
+raw-window-handle.workspace = true
+smithay-client-toolkit.workspace = true
+wayland-backend.workspace = true

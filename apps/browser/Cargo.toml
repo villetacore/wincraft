@@ -1,0 +1,13 @@
+[package]
+name = "browser"
+description = "WinCraft Browser: tabs, address bar and downloads on the WebKitGTK engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+webkit6 = "0.6"
+# webkit6 uses GTK 4.10 API (Accessible) without enabling it in gtk4 itself.
+gtk4 = { version = "0.11", features = ["v4_10"] }

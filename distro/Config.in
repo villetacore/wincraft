@@ -1,0 +1,5 @@
+menu "WinCraft OS"
+source "$BR2_EXTERNAL_WINCRAFT_PATH/package/labwc/Config.in"
+source "$BR2_EXTERNAL_WINCRAFT_PATH/package/wincraft/Config.in"
+source "$BR2_EXTERNAL_WINCRAFT_PATH/package/wincraft-wine/Config.in"
+endmenu

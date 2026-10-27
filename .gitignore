@@ -1,0 +1,20 @@
+/target/
+/.build/
+/dist/
+*.log
+/.idea/
+
+# Editors, host metadata and private configuration
+.DS_Store
+Thumbs.db
+.vscode/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.dmp
+*.core
+/coverage/

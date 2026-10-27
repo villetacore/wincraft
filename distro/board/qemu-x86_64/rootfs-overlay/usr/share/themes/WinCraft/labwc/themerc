@@ -1,0 +1,109 @@
+# WinCraft window frame (labwc): light Windows 11 style title bars, ReactOS-clear borders.
+# Keys labwc does not know (Openbox-only) are ignored.
+
+# Title bar buttons as wide as Windows' (46 px).
+window.titlebar.padding.width: 0
+window.titlebar.padding.height: 0
+window.button.width: 46
+window.button.height: 30
+window.button.spacing: 0
+window.button.hover.bg.corner-radius: 0
+window.active.button.close.hover.image.color: #ffffff
+window.active.indicator.toggled-keybind.color: #0067c0
+window.active.shadow.size: 0
+window.inactive.shadow.size: 0
+menu.overlap.x: 0
+menu.items.padding.x: 12
+menu.items.padding.y: 6
+osd.border.color: #c4c4c4
+osd.window-switcher.style-classic.width: 480
+osd.window-switcher.style-classic.item.active.bg.color: #dbe9f8
+osd.window-switcher.style-classic.item.active.border.color: #0067c0
+
+border.width: 1
+padding.width: 8
+padding.height: 7
+window.handle.width: 0
+window.client.padding.width: 0
+window.client.padding.height: 0
+window.label.text.justify: left
+
+window.active.border.color: #7a7a7a
+window.inactive.border.color: #c4c4c4
+window.active.client.color: #ffffff
+window.inactive.client.color: #ffffff
+
+window.active.title.bg: flat solid
+window.active.title.bg.color: #ffffff
+window.inactive.title.bg: flat solid
+window.inactive.title.bg.color: #f3f3f3
+window.active.label.bg: parentrelative
+window.active.label.text.color: #1b1b1b
+window.inactive.label.bg: parentrelative
+window.inactive.label.text.color: #8a8a8a
+
+window.active.button.unpressed.bg: flat solid
+window.active.button.unpressed.bg.color: #ffffff
+window.active.button.unpressed.image.color: #1b1b1b
+window.active.button.hover.bg: flat solid
+window.active.button.hover.bg.color: #e6e6e6
+window.active.button.hover.image.color: #000000
+window.active.button.pressed.bg: flat solid
+window.active.button.pressed.bg.color: #cccccc
+window.active.button.pressed.image.color: #000000
+window.active.button.disabled.bg: flat solid
+window.active.button.disabled.bg.color: #ffffff
+window.active.button.disabled.image.color: #bdbdbd
+window.active.button.toggled.unpressed.bg: flat solid
+window.active.button.toggled.unpressed.bg.color: #ffffff
+window.active.button.toggled.unpressed.image.color: #1b1b1b
+
+window.inactive.button.unpressed.bg: flat solid
+window.inactive.button.unpressed.bg.color: #f3f3f3
+window.inactive.button.unpressed.image.color: #8a8a8a
+window.inactive.button.hover.bg: flat solid
+window.inactive.button.hover.bg.color: #e6e6e6
+window.inactive.button.hover.image.color: #1b1b1b
+window.inactive.button.pressed.bg: flat solid
+window.inactive.button.pressed.bg.color: #cccccc
+window.inactive.button.disabled.bg: flat solid
+window.inactive.button.disabled.bg.color: #f3f3f3
+window.inactive.button.disabled.image.color: #d0d0d0
+window.inactive.button.toggled.unpressed.bg: flat solid
+window.inactive.button.toggled.unpressed.bg.color: #f3f3f3
+window.inactive.button.toggled.unpressed.image.color: #8a8a8a
+
+window.active.handle.bg: flat solid
+window.active.handle.bg.color: #ffffff
+window.inactive.handle.bg: flat solid
+window.inactive.handle.bg.color: #f3f3f3
+window.active.grip.bg: flat solid
+window.active.grip.bg.color: #ffffff
+window.inactive.grip.bg: flat solid
+window.inactive.grip.bg.color: #f3f3f3
+
+menu.border.width: 1
+menu.border.color: #c4c4c4
+menu.separator.color: #e0e0e0
+menu.title.bg: flat solid
+menu.title.bg.color: #f3f3f3
+menu.title.text.color: #1b1b1b
+menu.items.bg: flat solid
+menu.items.bg.color: #f9f9f9
+menu.items.text.color: #1b1b1b
+menu.items.disabled.text.color: #a0a0a0
+menu.items.active.bg: flat solid
+menu.items.active.bg.color: #dbe9f8
+menu.items.active.text.color: #000000
+
+osd.border.width: 1
+osd.border.color: #c4c4c4
+osd.bg: flat solid
+osd.bg.color: #f9f9f9
+osd.label.bg: flat solid
+osd.label.bg.color: #f9f9f9
+osd.label.text.color: #1b1b1b
+osd.hilight.bg: flat solid
+osd.hilight.bg.color: #0067c0
+osd.unhilight.bg: flat solid
+osd.unhilight.bg.color: #c4c4c4

@@ -1,0 +1,3 @@
+[build]
+# Keep developer account names and host paths out of compiled Rust artifacts.
+rustflags = ["--remap-path-prefix", ".=/wincraft"]

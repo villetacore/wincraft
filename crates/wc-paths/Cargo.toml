@@ -1,0 +1,8 @@
+[package]
+name = "wc-paths"
+description = "Windows-style namespace for WinCraft: drives, known folders, C:\\ <-> Unix paths"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true

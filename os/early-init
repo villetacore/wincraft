@@ -1,0 +1,72 @@
+#!/bin/busybox sh
+# WinCraft early init: find the live medium, mount the read-only system image,
+# put a RAM overlay on top and hand over to the Rust system init.
+# Only ISO 9660 media are probed, read-only: live mode never writes local disks.
+/bin/busybox --install -s /bin
+export PATH=/bin
+mkdir -p /proc /sys /dev /media/medium /media/lower /media/rw /newroot
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+
+CMDLINE=$(cat /proc/cmdline)
+arg() { for w in $CMDLINE; do case $w in "$1"=*) echo "${w#*=}" ;; esac; done; }
+has() { for w in $CMDLINE; do [ "$w" = "$1" ] && return 0; done; return 1; }
+DEBUG=0
+has wincraft.debug && DEBUG=1
+MEDIA_ID=$(arg wincraft.media)
+echo "WINCRAFT_EARLY media=${MEDIA_ID:-any} debug=$DEBUG"
+
+fail() {
+    echo "WINCRAFT_EARLY_FAILED: $*"
+    if [ "$DEBUG" = 1 ]; then
+        echo 'Debug boot: emergency shell. Type exit to retry the handover.'
+        setsid sh -c 'exec sh </dev/console >/dev/console 2>&1'
+    else
+        echo 'Boot failed. Restart and choose the "debug" menu entry for a shell.'
+        while true; do sleep 3600; done
+    fi
+}
+
+while read -r module; do
+    insmod "/lib/modules/$module" 2>/dev/null
+done < /lib/modules/load.list
+
+found=
+tries=0
+while [ -z "$found" ] && [ $tries -lt 40 ]; do
+    for dev in /dev/sr* /dev/sd* /dev/vd* /dev/nvme*n*; do
+        [ -b "$dev" ] || continue
+        mount -t iso9660 -o ro "$dev" /media/medium 2>/dev/null || continue
+        if [ -f /media/medium/wincraft/rootfs.squashfs ] &&
+           { [ -z "$MEDIA_ID" ] || [ "$(cat /media/medium/wincraft/id 2>/dev/null)" = "$MEDIA_ID" ]; }; then
+            found=$dev
+            break
+        fi
+        umount /media/medium
+    done
+    [ -n "$found" ] || { tries=$((tries + 1)); sleep 0.5; }
+done
+[ -n "$found" ] || fail "live medium ${MEDIA_ID} not found"
+echo "WINCRAFT_MEDIUM $found"
+
+if has wincraft.verify; then
+    echo 'Verifying system image checksum...'
+    (cd /media/medium/wincraft && sha256sum -c SHA256SUMS) || fail 'system image checksum mismatch'
+fi
+
+mount -t squashfs -o ro,loop /media/medium/wincraft/rootfs.squashfs /media/lower || fail 'cannot mount rootfs.squashfs'
+mount -t tmpfs -o mode=0755 tmpfs /media/rw || fail 'cannot create RAM layer'
+mkdir -p /media/rw/upper /media/rw/work
+mount -t overlay overlay -o lowerdir=/media/lower,upperdir=/media/rw/upper,workdir=/media/rw/work /newroot ||
+    fail 'cannot mount overlay root'
+[ -x /newroot/init ] || fail 'system init missing in image'
+
+for m in medium lower rw; do
+    mkdir -p "/newroot/media/wincraft-$m"
+    mount --move "/media/$m" "/newroot/media/wincraft-$m"
+done
+umount /proc /sys
+umount /dev 2>/dev/null
+echo 'WINCRAFT_EARLY_HANDOVER'
+exec switch_root /newroot /init

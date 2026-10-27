@@ -1,0 +1,14 @@
+[package]
+name = "taskmgr"
+description = "WinCraft Task Manager"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+eframe.workspace = true
+egui.workspace = true
+libc.workspace = true
+wc-ui.workspace = true

@@ -1,0 +1,24 @@
+config BR2_PACKAGE_WINCRAFT
+	bool "wincraft (system and shell)"
+	depends on BR2_x86_64
+	depends on BR2_PACKAGE_WLROOTS_XWAYLAND
+	depends on BR2_PACKAGE_WEBKITGTK # browser
+	depends on BR2_PACKAGE_LIBGTK4_WAYLAND # browser
+	select BR2_PACKAGE_LABWC
+	select BR2_PACKAGE_SEATD
+	select BR2_PACKAGE_SEATD_DAEMON
+	select BR2_PACKAGE_WAYLAND
+	select BR2_PACKAGE_LIBXKBCOMMON
+	select BR2_PACKAGE_XKEYBOARD_CONFIG
+	select BR2_PACKAGE_XDATA_XCURSOR_THEMES
+	select BR2_PACKAGE_FOOT
+	select BR2_PACKAGE_WLR_RANDR
+	help
+	  WinCraft's own Rust components: wincraft-boot (initramfs stage),
+	  wincraft-init (PID 1), winlogon (session), explorer (shell),
+	  notepad, taskmgr, start (launcher) and browser (WebKitGTK). Built from this repository with the build
+	  host's Rust toolchain against the Buildroot sysroot.
+
+	  The session runs on Wayland (ADR-018): seatd hands the devices
+	  to labwc, which runs as the user; the shell's desktop and taskbar
+	  are layer-shell surfaces, X11 and Windows programs use XWayland.

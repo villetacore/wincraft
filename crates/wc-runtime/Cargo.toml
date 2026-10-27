@@ -1,0 +1,8 @@
+[package]
+name = "wc-runtime"
+description = "WinCraft Win32 runtime management: prefix readiness, runtime identity, launch journal"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true

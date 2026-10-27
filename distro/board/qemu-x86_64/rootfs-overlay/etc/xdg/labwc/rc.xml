@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WinCraft window behaviour (labwc, ADR-018): Windows title bar layout and shortcuts.
+     The shell (explorer) owns the desktop and taskbar (layer-shell surfaces) and the
+     Start menu; the rules below place the shell's own small windows. -->
+<labwc_config>
+  <core>
+    <decoration>server</decoration>
+    <gap>0</gap>
+    <!-- Windows programs start Xwayland often (wineserver, every launcher): keep it. -->
+    <xwaylandPersistence>yes</xwaylandPersistence>
+  </core>
+  <placement><policy>cascade</policy></placement>
+  <focus>
+    <followMouse>no</followMouse>
+    <raiseOnFocus>yes</raiseOnFocus>
+  </focus>
+  <theme>
+    <name>WinCraft</name>
+    <titlebar>
+      <layout>icon:iconify,max,close</layout>
+      <showTitle>yes</showTitle>
+    </titlebar>
+    <cornerRadius>8</cornerRadius>
+    <keepBorder>yes</keepBorder>
+    <dropShadows>no</dropShadows>
+    <font place="ActiveWindow"><name>DejaVu Sans</name><size>9</size><weight>normal</weight></font>
+    <font place="InactiveWindow"><name>DejaVu Sans</name><size>9</size><weight>normal</weight></font>
+    <font place="MenuHeader"><name>DejaVu Sans</name><size>9</size></font>
+    <font place="MenuItem"><name>DejaVu Sans</name><size>9</size></font>
+    <font place="OnScreenDisplay"><name>DejaVu Sans</name><size>10</size></font>
+  </theme>
+  <!-- Alt+Tab: list of windows with titles, like Windows' classic switcher. -->
+  <windowSwitcher preview="yes" outlines="yes">
+    <osd show="yes" style="classic" output="all" />
+    <fields>
+      <field content="title" width="100%" />
+    </fields>
+  </windowSwitcher>
+  <desktops number="1" />
+  <resistance>
+    <screenEdgeStrength>20</screenEdgeStrength>
+    <windowEdgeStrength>20</windowEdgeStrength>
+  </resistance>
+  <keyboard>
+    <repeatRate>25</repeatRate>
+    <repeatDelay>600</repeatDelay>
+    <keybind key="A-F4"><action name="Close" /></keybind>
+    <keybind key="A-Tab"><action name="NextWindow" /></keybind>
+    <keybind key="A-S-Tab"><action name="PreviousWindow" /></keybind>
+    <keybind key="W-d"><action name="ToggleShowDesktop" /></keybind>
+    <keybind key="W-m"><action name="ToggleShowDesktop" /></keybind>
+    <keybind key="W-e"><action name="Execute" command="explorer shell:ThisPC" /></keybind>
+    <keybind key="W-r"><action name="Execute" command="explorer --run" /></keybind>
+    <keybind key="W-i"><action name="Execute" command="explorer --settings" /></keybind>
+    <keybind key="C-S-Escape"><action name="Execute" command="taskmgr" /></keybind>
+    <!-- The Win key alone opens Start (on release, so Win+E etc. do not). -->
+    <keybind key="Super_L" onRelease="yes"><action name="Execute" command="explorer --start" /></keybind>
+    <keybind key="C-Escape"><action name="Execute" command="explorer --start" /></keybind>
+    <keybind key="W-Up"><action name="Maximize" /></keybind>
+    <keybind key="W-Down"><action name="UnMaximize" /></keybind>
+    <keybind key="W-Left"><action name="SnapToEdge" direction="left" /></keybind>
+    <keybind key="W-Right"><action name="SnapToEdge" direction="right" /></keybind>
+  </keyboard>
+  <mouse>
+    <default />
+    <doubleClickTime>400</doubleClickTime>
+  </mouse>
+  <windowRules>
+    <!-- Start menu: above the Start button, no frame, not on the taskbar or in Alt+Tab. -->
+    <windowRule identifier="explorer" title="Start" serverDecoration="no" skipTaskbar="yes" skipWindowSwitcher="yes">
+      <action name="MoveToEdge" direction="left" snapWindows="no" />
+      <action name="MoveToEdge" direction="down" snapWindows="no" />
+      <action name="ToggleAlwaysOnTop" />
+    </windowRule>
+    <!-- Run: bottom-left corner, as in Windows. -->
+    <windowRule identifier="explorer" title="Run">
+      <action name="MoveToEdge" direction="left" snapWindows="no" />
+      <action name="MoveToEdge" direction="down" snapWindows="no" />
+    </windowRule>
+    <!-- Message boxes of the shell: centred. -->
+    <windowRule identifier="explorer" title="WinCraft">
+      <action name="AutoPlace" policy="center" />
+    </windowRule>
+  </windowRules>
+</labwc_config>

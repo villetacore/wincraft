@@ -1,0 +1,18 @@
+[package]
+name = "explorer"
+description = "WinCraft shell: desktop, taskbar, Start menu, File Explorer, Run, Settings"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+eframe.workspace = true
+egui.workspace = true
+libc.workspace = true
+wc-formats.workspace = true
+wc-launch.workspace = true
+wc-paths.workspace = true
+wc-ui.workspace = true
+wc-wayland.workspace = true

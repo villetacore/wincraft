@@ -1,0 +1,11 @@
+[package]
+name = "wc-ui"
+description = "WinCraft design system: themes, vector icons, wallpaper and shared widgets"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+egui.workspace = true

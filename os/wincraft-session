@@ -1,0 +1,9 @@
+#!/bin/sh
+# Started by xinit as root (Xorg itself needs root without logind).
+# Everything the user sees runs as the unprivileged "user" account.
+exec /sbin/su-exec user:user /usr/bin/env -i \
+    PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin \
+    HOME=/home/user USER=user LOGNAME=user SHELL=/bin/sh LANG=C.UTF-8 \
+    DISPLAY="${DISPLAY:-:0}" XAUTHORITY=/run/user/1000/Xauthority \
+    XDG_RUNTIME_DIR=/run/user/1000 \
+    /usr/bin/wincraft-user-session
