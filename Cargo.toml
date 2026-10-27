@@ -46,7 +46,7 @@ raw-window-handle = "0.6"
 smithay-client-toolkit = "0.20"
 # libwayland-client is loaded at run time (as winit does), so glutin can share the connection.
 wayland-backend = { version = "0.3", features = ["client_system", "dlopen"] }
-egui = { version = "0.32", default-features = false }
+egui = { version = "0.37", default-features = false }
 libc = "0.2"
 sha2 = "0.10"
 
