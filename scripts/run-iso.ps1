@@ -5,8 +5,8 @@
 param(
     [switch]$Bios,      # legacy BIOS (SeaBIOS) instead of UEFI
     [switch]$NoData,    # do not attach dist/data.ext4 even if it exists
-    [int]$Memory = 8192,
-    [int]$Cpus = 4,
+    [int]$Memory = 4096,
+    [int]$Cpus = 2,
     [string]$Iso = "",
     [ValidateSet('auto', 'tcg', 'whpx')][string]$Accel = 'auto',
     # GTK by default: QEMU's SDL window on Windows freezes (window and guest) when the
@@ -15,6 +15,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $project = Split-Path $PSScriptRoot -Parent
+New-Item -ItemType Directory -Force -Path "$project\dist" | Out-Null
 $qemuDir = 'C:\Program Files\qemu'
 $qemu = "$qemuDir\qemu-system-x86_64.exe"
 if (!(Test-Path -LiteralPath $qemu)) { $qemu = (Get-Command qemu-system-x86_64 -ErrorAction Stop).Source; $qemuDir = Split-Path $qemu }

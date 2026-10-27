@@ -6,8 +6,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 SRC=$PWD
 STATE=/work/state
-BR_VERSION=2026.02.3
-BR_SHA256=5a59e7501b0b4ec52c41f4bfa79412320e0b37eae5f719605a258e8d0c6fc7fb
+source "$SRC/build/versions.env"
 BR=$STATE/buildroot-$BR_VERSION
 OUT=$STATE/output
 DEFCONFIG=wincraft_qemu_x86_64_defconfig

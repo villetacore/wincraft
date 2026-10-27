@@ -39,10 +39,13 @@ cargo vendor --locked "$staging/vendor" | sed "s|$staging/vendor|vendor|g" > "$s
 cp Cargo.toml Cargo.lock LICENSE "$staging/"
 cp -r .cargo apps crates system build distro scripts tests os docs "$staging/"
 cp README.md THIRD_PARTY.md "$staging/"
-cp /work/state/buildroot-*.tar.xz "$staging/"
+source build/versions.env
+cp "/work/state/buildroot-$BR_VERSION.tar.xz" "$staging/"
 cp -r /work/state/output/legal-info "$staging/"
 # Record tool versions; no account names, runner environment or private paths.
-{ printf 'WinCraft %s\n' "$ref"; rustc --version; cargo --version; } > "$release/build-info.txt"
+revision=$(git -c safe.directory="$PWD" rev-parse HEAD 2>/dev/null || cat SOURCE_REVISION 2>/dev/null || printf unknown)
+printf '%s\n' "$revision" > "$staging/SOURCE_REVISION"
+{ printf 'WinCraft %s\ncommit: %s\n' "$ref" "$revision"; rustc --version; cargo --version; } > "$release/build-info.txt"
 XZ_OPT="-T2 -1" tar -C "$staging" -cJf "$release/wincraft-sources-$ref.tar.xz" .
 # GitHub Release has a per-file size limit. Split large source archives, with
 # ordered names; checksums cover precisely the files that are uploaded.

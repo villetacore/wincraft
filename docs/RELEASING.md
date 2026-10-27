@@ -43,6 +43,6 @@ If an upload fails, rerun the failed job to finish the draft. Existing tags must
 
 ## Public identity and privacy
 
-Public project identity is `villetacore`. Commit authors use a GitHub noreply address. Build outputs, VM data, IDE settings, environment files, keys, and logs are ignored. `scripts/check-repository.py` checks publishable files for private account names, host paths, obvious tokens, binary artifacts, and oversized files. It is a focused guard, not a complete secret scanner. Review new files before publication.
+Public project identity is `villetacore`. Commit authors use a GitHub noreply address. Build outputs, VM data, IDE settings, environment files, keys, and logs are ignored. `scripts/check-repository.py` checks publishable files for personal email addresses, host paths, obvious tokens, binary artifacts, and oversized files. It is a focused guard, not a complete secret scanner. Review new files before publication.
 
 Existing commits retain their original metadata; changing local Git identity affects future commits. GitHub repository settings, account profiles, and any previously published history are separate from source file cleanup.

@@ -52,5 +52,7 @@ jobs:
         with:
           persist-credentials: false
       - run: python3 scripts/check-repository.py
+      - name: Validate pinned Buildroot configuration
+        run: bash scripts/check-buildroot.sh
       - name: Shell syntax
         run: git ls-files -z '*.sh' | xargs -0 -r -n1 bash -n

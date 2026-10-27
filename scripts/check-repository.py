@@ -9,7 +9,7 @@ files = subprocess.check_output(
     ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"]
 ).decode().split("\0")
 patterns = {
-    "personal account": re.compile("alex" + r"[_ -]?" + "pyslar", re.I),
+    "personal email": re.compile(r"\b[A-Za-z0-9._%+-]+@(?!users\.noreply\.github\.com\b|example\.(?:com|org)\b)[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b", re.I),
     "personal host path": re.compile(r"(?:/Users/|/home/)(?!user(?:[/\s\"']|$)|root(?:[/\s\"']|$))[A-Za-z0-9_.-]+/|[C-Z]:\\Users\\(?!<?user>?\\)[^\\\s]+\\", re.I),
     "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     "access token": re.compile(r"(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{50,}|AKIA[A-Z0-9]{16})"),
