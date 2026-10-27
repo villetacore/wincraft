@@ -180,7 +180,7 @@ The [architecture guide](docs/12-wincraft-os.md) explains the system in detail. 
 
 ## Development and releases
 
-Pull requests and branch pushes run formatting, library tests on Windows/Linux, Linux guest checks, and repository hygiene checks. A `v*` tag additionally builds the ISO, collects sources and notices, boots the ISO in BIOS and UEFI QEMU VMs, and publishes a prerelease with SHA-256 checksums.
+Pull requests and branch pushes run formatting, library tests on Windows/Linux, Linux guest checks, and repository hygiene checks. Code/build pushes to `main` also build an ISO, collect sources and notices, and boot the ISO in BIOS and UEFI QEMU VMs. Download successful builds from **Actions → Release → Artifacts → wincraft-iso-…** (retained for seven days). A `v*` tag publishes a prerelease with SHA-256 checksums. You can also start an ISO build with **Actions → Release → Run workflow**.
 
 [Contributing](CONTRIBUTING.md) · [Release process](docs/RELEASING.md) · [Security policy](SECURITY.md) · [Changelog](CHANGELOG.md)
 

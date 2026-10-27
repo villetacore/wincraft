@@ -17,6 +17,7 @@ bash build/build.sh
 bash build/build.sh legal-info
 bash build/build.sh target-post-image
 cp /work/state/output/images/wincraft-os.iso dist/wincraft-os.iso
+(cd dist && sha256sum wincraft-os.iso > wincraft-os.iso.sha256)
 release="$PWD/dist/release"
 rm -rf "$release"
 mkdir -p "$release"
@@ -38,7 +39,7 @@ trap 'rm -rf "$staging"' EXIT
 cargo vendor --locked "$staging/vendor" | sed "s|$staging/vendor|vendor|g" > "$staging/vendor-config.toml"
 cp Cargo.toml Cargo.lock LICENSE "$staging/"
 cp -r .cargo apps crates system build distro scripts tests os docs "$staging/"
-cp README.md THIRD_PARTY.md "$staging/"
+cp README.md README.ru.md THIRD_PARTY.md "$staging/"
 source build/versions.env
 cp "/work/state/buildroot-$BR_VERSION.tar.xz" "$staging/"
 cp -r /work/state/output/legal-info "$staging/"

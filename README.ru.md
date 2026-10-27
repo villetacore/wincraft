@@ -107,7 +107,7 @@ sudo bash build/builder.sh setup
 sudo bash build/builder.sh run bash build/release.sh
 ```
 
-CI проверяет библиотеки на Windows/Linux и гостевой workspace на Linux. Тег `v*` запускает сборку ISO, сбор исходников и лицензий, проверки загрузки BIOS/UEFI и публикацию prerelease с SHA-256.
+CI проверяет библиотеки на Windows/Linux и гостевой workspace на Linux. Изменения кода и сборки в `main` также запускают сборку ISO и проверки загрузки BIOS/UEFI. Готовый образ доступен семь дней в **Actions → Release → Artifacts → wincraft-iso-…**. Тег `v*` публикует prerelease с ISO, исходниками, лицензиями и SHA-256. Сборку можно запустить вручную: **Actions → Release → Run workflow**.
 
 [Инструкция сборки](docs/BUILDING.md) · [Подготовка релиза](docs/RELEASING.md) · [Как участвовать](CONTRIBUTING.md) · [Изменения](CHANGELOG.md)
 

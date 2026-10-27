@@ -1,13 +1,20 @@
 name: Release
 on:
   push:
+    branches: [main]
     tags: ['v*']
+    paths-ignore:
+      - 'docs/**'
+      - 'README*'
+      - '*.md'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/pull_request_template.md'
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
   group: release-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
 jobs:
   checks:
     uses: ./.github/workflows/ci.yml
@@ -36,11 +43,24 @@ jobs:
         env:
           WINCRAFT_RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
           WINCRAFT_JOBS: '2'
-        run: sudo --preserve-env=WINCRAFT_RELEASE_TAG,WINCRAFT_JOBS bash build/builder.sh run bash build/release.sh
+        run: |
+          mkdir -p dist
+          sudo --preserve-env=WINCRAFT_RELEASE_TAG,WINCRAFT_JOBS bash build/builder.sh run bash build/release.sh 2>&1 | tee dist/build.log
       - name: Boot BIOS image
         run: python3 scripts/smoke-iso.py dist/wincraft-os.iso
       - name: Boot UEFI image
         run: python3 scripts/smoke-iso.py dist/wincraft-os.iso --uefi
+      - name: Upload boot-tested ISO
+        uses: actions/upload-artifact@v7
+        with:
+          name: wincraft-iso-${{ github.run_number }}
+          path: |
+            dist/wincraft-os.iso
+            dist/wincraft-os.iso.sha256
+            dist/release/wincraft-launcher.zip
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
       - name: Archive verified release assets
         uses: actions/upload-artifact@v7
         with:
@@ -49,12 +69,14 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
-      - name: Archive boot logs
+      - name: Archive build and boot logs
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: boot-logs
-          path: dist/smoke-*.log
+          path: |
+            dist/build.log
+            dist/smoke-*.log
           if-no-files-found: ignore
   publish:
     if: startsWith(github.ref, 'refs/tags/')

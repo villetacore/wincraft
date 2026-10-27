@@ -5,6 +5,25 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      graphics:
+        patterns:
+          - eframe
+          - egui
+          - egui_glow
+          - glutin
+          - smithay-client-toolkit
+          - wayland-backend
+    # Breaking graphics API upgrades need a coordinated source migration.
+    ignore:
+      - dependency-name: eframe
+        versions: [">= 0.33.0"]
+      - dependency-name: egui
+        versions: [">= 0.33.0"]
+      - dependency-name: egui_glow
+        versions: [">= 0.33.0"]
+      - dependency-name: smithay-client-toolkit
+        versions: [">= 0.21.0"]
   - package-ecosystem: github-actions
     directory: /
     schedule:

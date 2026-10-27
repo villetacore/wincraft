@@ -4,9 +4,15 @@
 
 `CI` runs on branch pushes and pull requests: Rust formatting, Windows/Linux library tests and clippy, Linux guest workspace tests/checks, shell syntax, and repository hygiene.
 
-`Release` runs on `v*` tag pushes and manual dispatch. It first runs CI, then builds a fresh ISO from source in the isolated Linux builder, collects sources/notices, and boots the ISO in BIOS and UEFI QEMU VMs. After successful checks, tag runs upload the verified files to a draft release and publish it as a **prerelease**. A manual branch run builds downloadable Actions artifacts without creating a GitHub release.
+`Release` runs on code/build pushes to `main`, `v*` tag pushes, and manual dispatch. Documentation-only branch pushes skip the expensive ISO build; tags always run it. It first runs CI, then builds a fresh ISO from source in the isolated Linux builder, collects sources/notices, and boots the ISO in BIOS and UEFI QEMU VMs. After successful checks, tag runs upload the verified files to a draft release and publish it as a **prerelease**. Branch and manual runs build downloadable Actions artifacts without creating a GitHub release. New branch pushes cancel superseded branch ISO builds; tagged releases are not cancelled.
 
 Only the publication job has `contents: write`; build jobs use read-only permissions. Pull requests do not execute privileged ISO builds. No personal access token is needed: release publication uses GitHub's scoped workflow token. See [GitHub workflow permissions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#permissions).
+
+## Download an ISO from CI
+
+Open **Actions → Release**, select a successful run, and download `wincraft-iso-<run number>` under **Artifacts**. Extract the archive to get `wincraft-os.iso`, its SHA-256 file, and the Windows launcher ZIP. Artifacts are kept for seven days; tagged Releases are the durable distribution channel. A failed build or boot check does not upload this ISO artifact.
+
+To start a build without a code change, use **Actions → Release → Run workflow → main**. A normal code push to `main` starts the same pipeline automatically. For a published preview, push a new `v*` tag matching the Cargo version.
 
 ## Runner capacity
 
@@ -43,6 +49,6 @@ If an upload fails, rerun the failed job to finish the draft. Existing tags must
 
 ## Public identity and privacy
 
-Public project identity is `villetacore`. Commit authors use a GitHub noreply address. Build outputs, VM data, IDE settings, environment files, keys, and logs are ignored. `scripts/check-repository.py` checks publishable files for personal email addresses, host paths, obvious tokens, binary artifacts (except validated, metadata-free PNGs in `docs/screenshots/`), and oversized files. It is a focused guard, not a complete secret scanner. Review new files before publication.
+Public project identity is `villetacore`. New commits are GPG-signed with the selected project identity. Build outputs, VM data, IDE settings, environment files, keys, and logs are ignored. `scripts/check-repository.py` checks publishable files for personal email addresses, host paths, obvious tokens, binary artifacts (except validated, metadata-free PNGs in `docs/screenshots/`), and oversized files. It is a focused guard, not a complete secret scanner. Review new files before publication.
 
 Existing commits retain their original metadata; changing local Git identity affects future commits. GitHub repository settings, account profiles, and any previously published history are separate from source file cleanup.
