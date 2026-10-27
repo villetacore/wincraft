@@ -48,7 +48,7 @@ smithay-client-toolkit = "0.21"
 wayland-backend = { version = "0.3", features = ["client_system", "dlopen"] }
 egui = { version = "0.32", default-features = false }
 libc = "0.2"
-sha2 = "0.10"
+sha2 = "0.11"
 
 [profile.release]
 opt-level = 3
