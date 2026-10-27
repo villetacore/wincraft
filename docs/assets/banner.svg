@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="title desc">
+  <title id="title">WinCraft OS</title>
+  <desc id="desc">A familiar desktop. An open foundation. Blue geometric artwork inspired by the WinCraft desktop.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#08172f"/><stop offset="1" stop-color="#163f70"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#47b8ff" stop-opacity=".32"/><stop offset="1" stop-color="#47b8ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="face" x2="1" y2="1"><stop stop-color="#77ddff"/><stop offset="1" stop-color="#32a7f0"/></linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#8acbff" stroke-opacity=".055"/></pattern>
+  </defs>
+  <rect width="1200" height="380" rx="24" fill="url(#bg)"/>
+  <rect width="1200" height="380" rx="24" fill="url(#grid)"/>
+  <ellipse cx="1010" cy="195" rx="340" ry="300" fill="url(#glow)"/>
+  <g fill="none" stroke="#6dcfff" stroke-opacity=".16">
+    <path d="m958 32 208 120v176L958 448 750 328V152Z"/>
+    <path d="m958 92 156 90v132l-156 90-156-90V182Z"/>
+    <path d="M958 92v312M802 182l156 90 156-90"/>
+  </g>
+  <g transform="translate(74 67)">
+    <path d="m40 0 40 23-40 23L0 23Z" fill="url(#face)"/>
+    <path d="m0 23 40 23v46L0 69Z" fill="#147ed1"/>
+    <path d="m40 46 40-23v46L40 92Z" fill="#35b9ef"/>
+  </g>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="177" y="113" fill="#f3f9ff" font-size="56" font-weight="700" letter-spacing="-2">WinCraft <tspan fill="#70d5ff" font-weight="400">OS</tspan></text>
+    <text x="76" y="210" fill="#f3f9ff" font-size="33" font-weight="600" letter-spacing="-.7">A familiar desktop.</text>
+    <text x="76" y="253" fill="#a9c9e6" font-size="33" font-weight="400" letter-spacing="-.7">An open foundation.</text>
+    <g font-size="12" font-weight="600" letter-spacing="2" fill="#a9d9fa">
+      <text x="77" y="322">RUST</text><circle cx="143" cy="318" r="2" fill="#47b8ff"/>
+      <text x="163" y="322">LINUX</text><circle cx="239" cy="318" r="2" fill="#47b8ff"/>
+      <text x="259" y="322">WAYLAND</text><circle cx="363" cy="318" r="2" fill="#47b8ff"/>
+      <text x="383" y="322">WINE</text>
+    </g>
+    <text x="1120" y="322" text-anchor="end" fill="#7bafd5" font-size="12" letter-spacing="2">BY VILLETACORE</text>
+  </g>
+</svg>

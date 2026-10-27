@@ -1,23 +1,77 @@
 <div align="center">
 
-# WinCraft OS
-
-**A familiar desktop. An open foundation.**
+<img src="docs/assets/banner.svg" alt="WinCraft OS — A familiar desktop. An open foundation." width="100%">
 
 An experimental Linux system with a Rust desktop, Windows-style paths, and Windows application support through Wine.
 
 [![CI](https://github.com/villetacore/wincraft/actions/workflows/ci.yml/badge.svg)](https://github.com/villetacore/wincraft/actions/workflows/ci.yml)
 [![Release](https://github.com/villetacore/wincraft/actions/workflows/release.yml/badge.svg)](https://github.com/villetacore/wincraft/actions/workflows/release.yml)
+[![Preview](https://img.shields.io/github/v/release/villetacore/wincraft?include_prereleases&color=168fd3&label=preview)](https://github.com/villetacore/wincraft/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Status: Developer preview](https://img.shields.io/badge/status-developer%20preview-orange.svg)](#project-status)
 
-[Download previews](https://github.com/villetacore/wincraft/releases) · [Documentation](docs/README.md) · [Report a bug](https://github.com/villetacore/wincraft/issues/new/choose) · [Contribute](CONTRIBUTING.md)
+[Download previews](https://github.com/villetacore/wincraft/releases) · [Documentation](docs/README.md) · [Report a bug](https://github.com/villetacore/wincraft/issues/new/choose) · [Contribute](CONTRIBUTING.md) · [Русский](README.ru.md)
 
 </div>
 
 ---
 
 WinCraft explores a desktop that feels familiar to Windows users while remaining an open Unix system underneath. It combines a vanilla Linux kernel, a custom Rust shell, a Wayland session, and Wine. The current target is **x86-64 QEMU virtual machines**.
+
+<p align="center">
+  <a href="docs/screenshots/explorer.png"><img src="docs/screenshots/explorer.png" alt="WinCraft Explorer showing familiar folders and C:, D:, and Z: drives" width="100%"></a>
+  <br><sub><b>Your files, in familiar places.</b> Explorer on the WinCraft desktop.</sub>
+</p>
+
+<table>
+<tr>
+<td width="50%"><a href="docs/screenshots/desktop.png"><img src="docs/screenshots/desktop.png" alt="WinCraft desktop with its blue wallpaper, desktop icons, and taskbar" width="100%"></a></td>
+<td width="50%"><a href="docs/screenshots/win32-demo.png"><img src="docs/screenshots/win32-demo.png" alt="A real Windows PE test program displaying a Win32 message box through Wine" width="100%"></a></td>
+</tr>
+<tr>
+<td align="center"><b>The desktop</b><br>Rust shell, taskbar, and desktop icons</td>
+<td align="center"><b>Windows meets Unix</b><br>A Win32 test application running through Wine</td>
+</tr>
+</table>
+
+<sub>Actual QEMU screenshots from a local live-image development build, captured on 14 October 2026. They illustrate the prototype; they are not screenshots of a verified GitHub release.</sub>
+
+## At a glance
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### A desktop you already know
+
+Explorer, Start, the taskbar, familiar keyboard shortcuts, and a Run dialog. Windows-style drive letters and known folders, backed by an open Unix filesystem.
+
+</td>
+<td width="50%" valign="top">
+
+### Windows applications, through Wine
+
+PE detection and application launching, with a WoW64 package targeting x64 and x86 programs. Compatibility depends on the application.
+
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+### Rust at the core of the experience
+
+Custom early boot, PID 1, session manager, desktop, and system applications. Wayland graphics through labwc, XWayland, and Mesa.
+
+</td>
+<td valign="top">
+
+### Boot, explore, start again
+
+A live ISO for QEMU with BIOS and UEFI support. The system image stays read-only; changes live in RAM unless an optional data disk is attached.
+
+</td>
+</tr>
+</table>
 
 ## Project status
 
@@ -27,12 +81,7 @@ Release builds are published as **prereleases** after CI and BIOS/UEFI boot chec
 
 ## Explore the desktop
 
-- **Desktop and Explorer** — taskbar, Start menu, file browsing, Run dialog, Settings, and Recycle Bin.
-- **Familiar paths** — `C:\`, `D:\`, known user folders, and case-insensitive path resolution.
-- **Windows applications** — PE detection and launching through Wine; a WoW64 build targets x64 and x86 programs.
-- **Built-in tools** — Notepad, Task Manager, and a WebKitGTK browser.
-- **Open system** — Linux, a Rust PID 1 and session manager, and a Wayland desktop running as an ordinary user.
-- **Live environment** — a read-only system image with a RAM overlay; an optional data disk provides persistence.
+Built-in tools include **Notepad**, **Task Manager**, and a **WebKitGTK browser**. The shell includes Settings and a Recycle Bin.
 
 | Shortcut | Action |
 | --- | --- |
@@ -102,6 +151,9 @@ Windows entry point: `Build-WinCraft.cmd` (Ubuntu WSL and Rust MSVC required).
 See [BUILDING.md](docs/BUILDING.md) for prerequisites, guest checks, data disks, and the distinction between the current Buildroot pipeline and the legacy Alpine pipeline.
 
 ## Architecture
+
+<img src="docs/assets/architecture.svg" alt="WinCraft architecture: applications, Rust desktop and Wine, Wayland graphics, Linux and system services" width="100%">
+
 
 ```text
 GRUB (BIOS / UEFI)

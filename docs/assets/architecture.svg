@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">The WinCraft stack</title>
+  <desc id="desc">Applications use the Rust desktop and Wine on Wayland. The system runs on a Linux kernel and boots through GRUB and the WinCraft early boot stage.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b1c35"/><stop offset="1" stop-color="#123454"/></linearGradient></defs>
+  <rect width="1200" height="300" rx="20" fill="url(#bg)"/>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="44" y="48" fill="#8dc9ef" font-size="12" font-weight="600" letter-spacing="2">FAMILIAR ON THE SURFACE. OPEN UNDERNEATH.</text>
+    <g fill="#193e62" stroke="#345c7b">
+      <rect x="44" y="77" width="354" height="72" rx="10"/>
+      <rect x="423" y="77" width="354" height="72" rx="10"/>
+      <rect x="802" y="77" width="354" height="72" rx="10"/>
+    </g>
+    <g fill="#f1f8ff" font-size="20" font-weight="600" text-anchor="middle">
+      <text x="221" y="108">Rust desktop</text><text x="600" y="108">Built-in applications</text><text x="979" y="108">Windows applications</text>
+    </g>
+    <g fill="#aacbe3" font-size="13" text-anchor="middle">
+      <text x="221" y="131">Explorer · Start · taskbar</text><text x="600" y="131">Notepad · Task Manager · browser</text><text x="979" y="131">Wine · XWayland</text>
+    </g>
+    <path d="M221 150v13m379-13v13m379-13v13" stroke="#66caff" stroke-width="2"/>
+    <rect x="44" y="165" width="1112" height="43" rx="8" fill="#154a72"/>
+    <text x="600" y="193" fill="#d5f0ff" text-anchor="middle" font-size="17">Wayland · labwc · Mesa</text>
+    <rect x="44" y="220" width="1112" height="43" rx="8" fill="#102c48" stroke="#345c7b"/>
+    <text x="600" y="248" fill="#aacbe3" text-anchor="middle" font-size="16">Linux kernel · Rust system services · GRUB + wincraft-boot</text>
+  </g>
+</svg>
