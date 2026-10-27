@@ -526,7 +526,6 @@ version = "0.32.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "94bdf37f8d5bd9aa7f753573fdda9cf7343afa73dd28d7bfe9593bd9798fc07e"
 dependencies = [
- "bytemuck",
  "emath 0.32.3",
 ]
 
@@ -552,8 +551,8 @@ dependencies = [
  "egui 0.37.0",
  "egui-wgpu",
  "egui-winit",
- "egui_glow 0.37.0",
- "glow 0.17.0",
+ "egui_glow",
+ "glow",
  "glutin",
  "glutin-winit",
  "image",
@@ -655,30 +654,13 @@ dependencies = [
 
 [[package]]
 name = "egui_glow"
-version = "0.32.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc7037813341727937f9e22f78d912f3e29bc3c46e2f40a9e82bb51cbf5e4cfb"
-dependencies = [
- "ahash",
- "bytemuck",
- "egui 0.32.3",
- "glow 0.16.0",
- "log",
- "memoffset",
- "profiling",
- "wasm-bindgen",
- "web-sys",
-]
-
-[[package]]
-name = "egui_glow"
 version = "0.37.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9275ca5cc35a6b7c94e0e8cedf22542f66cb0cf45ed8ab2657c78ff49fec7268"
 dependencies = [
  "bytemuck",
  "egui 0.37.0",
- "glow 0.17.0",
+ "glow",
  "log",
  "profiling",
  "winit",
@@ -695,9 +677,6 @@ name = "emath"
 version = "0.32.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "45fd7bc25f769a3c198fe1cf183124bf4de3bd62ef7b4f1eaf6b08711a3af8db"
-dependencies = [
- "bytemuck",
-]
 
 [[package]]
 name = "emath"
@@ -716,7 +695,6 @@ checksum = "63adcea970b7a13094fe97a36ab9307c35a750f9e24bf00bb7ef3de573e0fddb"
 dependencies = [
  "ab_glyph",
  "ahash",
- "bytemuck",
  "ecolor 0.32.3",
  "emath 0.32.3",
  "nohash-hasher",
@@ -1153,18 +1131,6 @@ dependencies = [
  "skrifa",
  "smallvec",
  "vello_common",
-]
-
-[[package]]
-name = "glow"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5e5ea60d70410161c8bf5da3fdfeaa1c72ed2c15f8bbb9d19fe3a4fad085f08"
-dependencies = [
- "js-sys",
- "slotmap",
- "wasm-bindgen",
- "web-sys",
 ]
 
 [[package]]
@@ -3271,7 +3237,7 @@ name = "wc-wayland"
 version = "0.4.0"
 dependencies = [
  "egui 0.32.3",
- "egui_glow 0.32.3",
+ "egui_glow",
  "glutin",
  "raw-window-handle",
  "smithay-client-toolkit 0.21.1",
